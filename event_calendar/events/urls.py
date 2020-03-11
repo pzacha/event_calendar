@@ -7,5 +7,6 @@ urlpatterns = [
     path("", views.ClosestEventsView.as_view(), name="Closest events"),
     path("all/", views.AllEventsView.as_view(), name="All events"),
     path("ongoing/", views.OngoingEventsView.as_view(), name="Ongoing events"),
+    path("past/", views.PastEventsView.as_view(), name="Past events"),
     path("<int:pk>/", views.DetailView.as_view(), name="Detail"),
 ]

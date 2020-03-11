@@ -37,6 +37,15 @@ class OngoingEventsView(generic.ListView):
         )
 
 
+class PastEventsView(generic.ListView):
+    template_name = "events/events.html"
+    context_object_name = "events_list"
+
+    def get_queryset(self):
+        """Return all past events"""
+        return Event.objects.filter(end_date__lte=timezone.now()).order_by("start_date")
+
+
 class DetailView(generic.DetailView):
     model = Event
     template_name = "events/detail.html"

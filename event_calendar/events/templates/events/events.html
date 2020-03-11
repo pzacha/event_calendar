@@ -7,3 +7,8 @@
 {% else %}
 <p>No events are available.</p>
 {% endif %}
+
+<br><a href="{% url 'events:All events' %}">{{ "All events" }}</a>
+<br><a href="{% url 'events:Closest events' %}">{{ "Closest events" }}</a>
+<br><a href="{% url 'events:Ongoing events' %}">{{ "Ongoing events" }}</a>
+<br><a href="{% url 'events:Past events' %}">{{ "Past events" }}</a>
