@@ -14,6 +14,33 @@ def create_event(event_name, start_days_delta, end_days_delta):
     return Event.objects.create(name=event_name, start_date=start, end_date=end)
 
 
+class ClosestEventsViewTests(TestCase):
+    def test_closest_events(self):
+        """
+        Only present 5 closest ongoing or upcoming events.
+        """
+        create_event("Event5", 4, 5)
+        create_event("Event1", -4, -2)
+        create_event("Event3", -1, 3)
+        create_event("Event2", -2, 1)
+        create_event("Event4", 0, 2)
+        create_event("Event7", 10, 11)
+        create_event("Event6", 8, 12)
+
+        response = self.client.get(reverse("events:Closest events"))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(
+            response.context["events_list"],
+            [
+                "<Event: Event2>",
+                "<Event: Event3>",
+                "<Event: Event4>",
+                "<Event: Event5>",
+                "<Event: Event6>",
+            ],
+        )
+
+
 class AllEventsViewTests(TestCase):
     def test_no_events(self):
         """
