@@ -2,8 +2,27 @@ import datetime
 
 from django.test import TestCase
 from django.utils import timezone
+from django.urls import reverse
 
 from .models import Event
+
+
+def create_event(event_name, start, end):
+    return Event.objects.create(name=Event_name, start_date=start, end_date=end)
+
+
+class EventEventsViewTests(TestCase):
+    def test_no_events(self):
+        """
+        Of there are no events, an appropriate message is displayed.
+        """
+        response = self.client.get(reverse("events:Events"))
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "No events are available.")
+        self.assertQuerysetEqual(response.context["all_events_list"], [])
+
+
+# class EventDetailViewTest(TestCase):
 
 
 class EventModelTests(TestCase):
@@ -40,4 +59,3 @@ class EventModelTests(TestCase):
         end_time = start_time + datetime.timedelta(days=1)
         past_event = Event(name="Past event", start_date=start_time, end_date=end_time)
         self.assertIs(past_event.status(), "Ended")
-
