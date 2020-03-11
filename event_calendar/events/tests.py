@@ -101,6 +101,21 @@ class OngoingEventsViewTests(TestCase):
         )
 
 
+class PastEventsViewTests(TestCase):
+    def test_future_past_and_present(self):
+        """
+        Only past event is displayed on Past events page.
+        """
+        create_event("Past event", -4, -2)
+        create_event("Present event", -3, 2)
+        create_event("Future event", 4, 5)
+        response = self.client.get(reverse("events:Past events"))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(
+            response.context["events_list"], ["<Event: Past event>"]
+        )
+
+
 class EventModelTests(TestCase):
     def test_status_with_upcoming_event(self):
         """
