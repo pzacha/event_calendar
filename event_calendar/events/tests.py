@@ -7,8 +7,10 @@ from django.urls import reverse
 from .models import Event
 
 
-def create_event(event_name, start, end):
-    return Event.objects.create(name=Event_name, start_date=start, end_date=end)
+def create_event(event_name, start_days_delta, end_days_delta):
+    start = timezone.now() + datetime.timedelta(days=start_days_delta)
+    end = timezone.now() + datetime.timedelta(days=end_days_delta)
+    return Event.objects.create(name=event_name, start_date=start, end_date=end)
 
 
 class EventEventsViewTests(TestCase):
@@ -20,6 +22,14 @@ class EventEventsViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No events are available.")
         self.assertQuerysetEqual(response.context["all_events_list"], [])
+
+    def test_present_event(self):
+        create_event("Present event", -1, 2)
+        response = self.client.get(reverse("events:Events"))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(
+            response.context["all_events_list"], ["<Event: Present event>"]
+        )
 
 
 # class EventDetailViewTest(TestCase):
