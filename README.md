@@ -1,14 +1,21 @@
 # Event calendar
+> Application that allows to view and manage cultural events.
 
 ## Technologies
 * python 3.8.0
 	* Django 3.0.4
+
+## General info
+This version includes:
+* An admin site for managing database.
+* Viewing closest, ongoing and past events.
 
 ## TODO
 List of features ready and TODOs for future development
 * User model (many-to-many relationship with Event model)
 * User authentication
 * Method detecting if users events are overlapping
+* Frontend
 
 ## Status
 Project is: _in_progress_
