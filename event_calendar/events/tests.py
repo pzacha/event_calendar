@@ -14,7 +14,7 @@ def create_event(event_name, start_days_delta, end_days_delta):
     return Event.objects.create(name=event_name, start_date=start, end_date=end)
 
 
-class EventEventsViewTests(TestCase):
+class AllEventsViewTests(TestCase):
     def test_no_events(self):
         """
         If there are no events, an appropriate message is displayed.
@@ -26,7 +26,7 @@ class EventEventsViewTests(TestCase):
 
     def test_present_event(self):
         """
-        Present event is displayed on the Events page.
+        Present event is displayed on the All events page.
         """
         create_event("Present event", -1, 2)
         response = self.client.get(reverse("events:All events"))
@@ -37,7 +37,7 @@ class EventEventsViewTests(TestCase):
 
     def test_past_event(self):
         """
-        Past event is not displayed on the Events page.
+        Past event is not displayed on the All events page.
         """
         create_event("Past event", -4, -2)
         response = self.client.get(reverse("events:All events"))
@@ -47,8 +47,8 @@ class EventEventsViewTests(TestCase):
 
     def test_future_and_past(self):
         """
-        Future event is displayed on the Events page.
-        Past event is not displayed on the Events page.
+        Future event is displayed on the All events page.
+        Past event is not displayed on the All events page.
         """
         create_event("Past event", -4, -2)
         create_event("Future event", 4, 5)
@@ -56,6 +56,21 @@ class EventEventsViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
             response.context["events_list"], ["<Event: Future event>"]
+        )
+
+
+class OngoingEventsViewTests(TestCase):
+    def test_future_past_and_present(self):
+        """
+        Only present event is displayed on Ongoing events page.
+        """
+        create_event("Past event", -4, -2)
+        create_event("Present event", -3, 2)
+        create_event("Future event", 4, 5)
+        response = self.client.get(reverse("events:Ongoing events"))
+        self.assertEqual(response.status_code, 200)
+        self.assertQuerysetEqual(
+            response.context["events_list"], ["<Event: Present event>"]
         )
 
 

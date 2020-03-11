@@ -31,8 +31,8 @@ class OngoingEventsView(generic.ListView):
     def get_queryset(self):
         """Return all ongoing events"""
         return (
-            Event.objects.filter(start_date__gte=timezone.now())
-            .filter(end_date__lte=timezone.now())
+            Event.objects.filter(start_date__lte=timezone.now())
+            .filter(end_date__gte=timezone.now())
             .order_by("start_date")
         )
 
