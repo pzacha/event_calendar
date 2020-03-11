@@ -1,4 +1,5 @@
 from django.views import generic
+from django.utils import timezone
 
 from .models import Event
 
@@ -9,9 +10,7 @@ class EventsView(generic.ListView):
 
     def get_queryset(self):
         """Return all upcoming or ongoing events"""
-        return Event.objects.order_by("start_date")
-
-    # Do not show past events
+        return Event.objects.filter(end_date__gte=timezone.now()).order_by("start_date")
 
 
 class DetailView(generic.DetailView):

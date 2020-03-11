@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
@@ -20,4 +21,10 @@ class Event(models.Model):
             return "Ongoing"
         else:
             return "Ended"
+
+    def clean(self):
+        if self.start_date > self.end_date:
+            raise ValidationError({"end_date": ("Event cannot end before it started.")})
+
+    # Should not let end be less than start
 
