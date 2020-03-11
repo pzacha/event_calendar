@@ -19,20 +19,20 @@ class EventEventsViewTests(TestCase):
         """
         If there are no events, an appropriate message is displayed.
         """
-        response = self.client.get(reverse("events:Events"))
+        response = self.client.get(reverse("events:All events"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No events are available.")
-        self.assertQuerysetEqual(response.context["all_events_list"], [])
+        self.assertQuerysetEqual(response.context["events_list"], [])
 
     def test_present_event(self):
         """
         Present event is displayed on the Events page.
         """
         create_event("Present event", -1, 2)
-        response = self.client.get(reverse("events:Events"))
+        response = self.client.get(reverse("events:All events"))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
-            response.context["all_events_list"], ["<Event: Present event>"]
+            response.context["events_list"], ["<Event: Present event>"]
         )
 
     def test_past_event(self):
@@ -40,10 +40,10 @@ class EventEventsViewTests(TestCase):
         Past event is not displayed on the Events page.
         """
         create_event("Past event", -4, -2)
-        response = self.client.get(reverse("events:Events"))
+        response = self.client.get(reverse("events:All events"))
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "No events are available.")
-        self.assertQuerysetEqual(response.context["all_events_list"], [])
+        self.assertQuerysetEqual(response.context["events_list"], [])
 
     def test_future_and_past(self):
         """
@@ -52,14 +52,11 @@ class EventEventsViewTests(TestCase):
         """
         create_event("Past event", -4, -2)
         create_event("Future event", 4, 5)
-        response = self.client.get(reverse("events:Events"))
+        response = self.client.get(reverse("events:All events"))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
-            response.context["all_events_list"], ["<Event: Future event>"]
+            response.context["events_list"], ["<Event: Future event>"]
         )
-
-
-# class EventDetailViewTest(TestCase):
 
 
 class EventModelTests(TestCase):
