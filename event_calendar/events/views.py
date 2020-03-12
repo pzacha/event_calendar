@@ -63,7 +63,7 @@ class CalendarView(generic.ListView):
         context = super().get_context_data(**kwargs)
         # d = get_date(self.request.GET.get("month", None))
         cal = Calendar(timezone.now().year, timezone.now().month)
-        html_cal = cal.formatmonth(withyear=True)
+        html_cal = cal.formatmonth()
         context["calendar"] = mark_safe(html_cal)
         context["prev_month"] = timezone.now().month - 1
         context["next_month"] = timezone.now().month + 1

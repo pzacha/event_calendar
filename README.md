@@ -3,6 +3,7 @@
 
 ## Screenshots
 Calendar page:
+
 ![calendar](/img/calendar.PNG)
 
 ## General info
