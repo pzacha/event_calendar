@@ -9,4 +9,5 @@ urlpatterns = [
     path("ongoing/", views.OngoingEventsView.as_view(), name="Ongoing events"),
     path("past/", views.PastEventsView.as_view(), name="Past events"),
     path("<int:pk>/", views.DetailView.as_view(), name="Detail"),
+    path("calendar/", views.CalendarView.as_view(), name="Calendar"),
 ]

@@ -1,6 +1,9 @@
 from django.views import generic
 from django.utils import timezone
+from django.urls import reverse_lazy
+from django.utils.safestring import mark_safe
 
+from .utils import Calendar
 from .models import Event
 
 
@@ -51,6 +54,17 @@ class DetailView(generic.DetailView):
     template_name = "events/detail.html"
 
 
-# ongoing events
-# show closest events
-# show past events
+class CalendarView(generic.ListView):
+    model = Event
+    template_name = "events/calendar.html"
+    success_url = reverse_lazy("calendar")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # d = get_date(self.request.GET.get("month", None))
+        cal = Calendar(timezone.now().year, timezone.now().month)
+        html_cal = cal.formatmonth(withyear=True)
+        context["calendar"] = mark_safe(html_cal)
+        context["prev_month"] = timezone.now().month - 1
+        context["next_month"] = timezone.now().month + 1
+        return context
