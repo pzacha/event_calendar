@@ -10,7 +10,7 @@ class AllEventsView(generic.ListView):
 
     def get_queryset(self):
         """Return all upcoming or ongoing events"""
-        return Event.objects.filter(end_date__gte=timezone.now()).order_by("start_date")
+        return Event.objects.order_by("start_date")
 
 
 class ClosestEventsView(generic.ListView):

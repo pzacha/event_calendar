@@ -53,36 +53,16 @@ class AllEventsViewTests(TestCase):
 
     def test_present_event(self):
         """
-        Present event is displayed on the All events page.
+        All events are displayed on the All events page.
         """
+        create_event("Past event", -4, -2)
         create_event("Present event", -1, 2)
-        response = self.client.get(reverse("events:All events"))
-        self.assertEqual(response.status_code, 200)
-        self.assertQuerysetEqual(
-            response.context["events_list"], ["<Event: Present event>"]
-        )
-
-    def test_past_event(self):
-        """
-        Past event is not displayed on the All events page.
-        """
-        create_event("Past event", -4, -2)
-        response = self.client.get(reverse("events:All events"))
-        self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "No events are available.")
-        self.assertQuerysetEqual(response.context["events_list"], [])
-
-    def test_future_and_past(self):
-        """
-        Future event is displayed on the All events page.
-        Past event is not displayed on the All events page.
-        """
-        create_event("Past event", -4, -2)
         create_event("Future event", 4, 5)
         response = self.client.get(reverse("events:All events"))
         self.assertEqual(response.status_code, 200)
         self.assertQuerysetEqual(
-            response.context["events_list"], ["<Event: Future event>"]
+            response.context["events_list"],
+            ["<Event: Past event>", "<Event: Present event>", "<Event: Future event>"],
         )
 
 
