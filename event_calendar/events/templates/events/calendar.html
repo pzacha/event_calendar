@@ -1,9 +1,9 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
 
-<a href="{% url 'events:Calendar' prev_month set_year %}"> Previous Month </a>
+<a href="{% url 'events:Calendar' prev_month prev_year %}"> Previous Month </a>
 <div class="cnt">
-    <a href="{% url 'events:Calendar' next_month set_year %}"> Next Month </a>
+    <a href="{% url 'events:Calendar' next_month next_year %}"> Next Month </a>
 </div>
 
 {{ calendar }}

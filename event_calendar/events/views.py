@@ -62,11 +62,20 @@ class CalendarView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # d = get_date(self.request.GET.get("month", None))
-        cal = Calendar(timezone.now().year, timezone.now().month)
+        m = context["view"].kwargs["month"]
+        y = context["view"].kwargs["year"]
+
+        cal = Calendar(y, m)
         html_cal = cal.formatmonth()
         context["calendar"] = mark_safe(html_cal)
-        context["prev_month"] = context["view"].kwargs["month"] - 1
-        context["next_month"] = context["view"].kwargs["month"] + 1
-        context["set_year"] = context["view"].kwargs["year"]
+        context["prev_month"] = m - 1
+        context["next_month"] = m + 1
+        context["next_year"] = y
+        context["prev_year"] = y
+        if m == 12:
+            context["next_month"] = 1
+            context["next_year"] = y + 1
+        elif m == 1:
+            context["prev_month"] = 12
+            context["prev_year"] = y - 1
         return context
