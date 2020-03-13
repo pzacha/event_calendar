@@ -1,7 +1,9 @@
-{% extends 'admin/base.html' %}
-{% block content %}
-<a href="{% url 'events:Calendar' %}?{{ prev_month }}"> Previous Month </a><a
-    href="{% url 'events:Calendar' %}?{{ next_month }}">
-    Next Month </a>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
+
+<a href="{% url 'events:Calendar' %}?{{ prev_month }}"> Previous Month </a>
+<div class="right">
+    <a href="{% url 'events:Calendar' %}?{{ next_month }}"> Next Month </a>
+</div>
+
 {{ calendar }}
-{% endblock %}

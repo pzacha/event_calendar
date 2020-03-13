@@ -2,6 +2,7 @@ from django.views import generic
 from django.utils import timezone
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
+from django.http import request
 
 from .utils import Calendar
 from .models import Event
@@ -57,7 +58,7 @@ class DetailView(generic.DetailView):
 class CalendarView(generic.ListView):
     model = Event
     template_name = "events/calendar.html"
-    success_url = reverse_lazy("calendar")
+    # success_url = reverse_lazy("calendar")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

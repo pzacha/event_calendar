@@ -12,24 +12,22 @@ class Calendar(HTMLCalendar):
 
     def formatday(self, day, events):
         events_per_day = events.filter(start_date__day=day)
-        d = ""
+        event_html = ""
         for event in events_per_day:
-            d += f'<li class="calendar_list"> {event.name} </li>'
+            event_html += f'<li class="calendar_list"> {event.name} </li>'
         if day != 0:
-            return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
+            return f"<td><span class='date'>{day}</span><ul> {event_html} </ul></td>"
         return "<td></td>"
 
     def formatweek(self, theweek, events):
-        week = ""
-        for d, weekday in theweek:
-            week += self.formatday(d, events)
-        return f"<tr> {week} </tr>"
+        week_html = "".join(self.formatday(d, events) for (d, weekday) in theweek)
+        return f"<tr> {week_html} </tr>"
 
     def formatmonth(self):
         events = Event.objects.filter(
             start_date__year=self.year, start_date__month=self.month
         )
-        cal = f'<table border="2" cellpadding="0" cellspacing="0" class="calendar">\n'
+        cal = f'<table border="4" cellpadding="10" cellspacing="0" class="calendar">\n'
         cal += f"{self.formatmonthname(self.year, self.month)}\n"
         cal += f"{self.formatweekheader()}\n"
         for week in self.monthdays2calendar(self.year, self.month):
