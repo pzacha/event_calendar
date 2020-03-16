@@ -14,7 +14,6 @@ class Calendar(HTMLCalendar):
         events_per_day = events.filter(start_date__day__lte=day).filter(
             end_date__day__gte=day
         )
-        # filter(start_date__lte=timezone.now()).filter(end_date__gte=timezone.now())
         event_html = ""
         for event in events_per_day:
             event_html += event.get_event_url() + "<br>"

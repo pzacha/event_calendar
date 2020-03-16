@@ -6,6 +6,10 @@ Calendar page:
 
 ![calendar](/img/calendar.PNG)
 
+Detail page:
+
+![calendar](/img/detail.PNG)
+
 ## General info
 This version includes:
 * An admin site for managing database.

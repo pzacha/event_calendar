@@ -5,3 +5,6 @@
     <br>{{event.desc}}
     <br>Status of event: {{event.status}}
 </p>
+
+<br><a href="{% url 'events:Calendar' %}">{{ "Back to calendar" }}</a>
+<br><a href="{% url 'events:All events' %}">{{ "See all events" }}</a>
