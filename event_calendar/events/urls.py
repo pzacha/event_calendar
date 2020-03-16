@@ -1,4 +1,5 @@
 from django.urls import path
+from django.utils import timezone
 
 from . import views
 
@@ -12,6 +13,12 @@ urlpatterns = [
     path(
         "calendar/<int:month>/<int:year>/",
         views.CalendarView.as_view(),
+        name="Calendar",
+    ),
+    path(
+        "calendar/",
+        views.CalendarView.as_view(),
+        {"month": timezone.now().month, "year": timezone.now().year},
         name="Calendar",
     ),
 ]
