@@ -141,3 +141,25 @@ class EventModelTests(TestCase):
             name="Wrong event", start_date=start_time, end_date=end_time
         )
         self.assertRaises(ValidationError, wrong_event.clean)
+
+
+class CalendarViewTests(TestCase):
+    def test_next_month(self):
+        """
+        When current month is 12 and year is equal to x, next month should be 1, and next year should be x + 1.
+
+        """
+        response = self.client.get(reverse("events:Calendar", args=(12, 2020,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["next_month"], 1)
+        self.assertEqual(response.context["next_year"], 2021)
+
+    def test_prev_month(self):
+        """
+        When current month is 1 and year is equal to x, next month should be 12, and next year should be x - 1.
+
+        """
+        response = self.client.get(reverse("events:Calendar", args=(1, 2020,)))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context["prev_month"], 12)
+        self.assertEqual(response.context["prev_year"], 2019)

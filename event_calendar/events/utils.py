@@ -27,7 +27,7 @@ class Calendar(HTMLCalendar):
         events = Event.objects.filter(
             start_date__year=self.year, start_date__month=self.month
         )
-        cal = f'<table border="4" cellpadding="10" cellspacing="0" class="calendar">\n'
+        cal = f'<table border="4" cellpadding="20" cellspacing="0" class="calendar">\n'
         cal += f"{self.formatmonthname(self.year, self.month)}\n"
         cal += f"{self.formatweekheader()}\n"
         for week in self.monthdays2calendar(self.year, self.month):

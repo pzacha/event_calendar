@@ -58,7 +58,6 @@ class DetailView(generic.DetailView):
 class CalendarView(generic.ListView):
     model = Event
     template_name = "events/calendar.html"
-    # success_url = reverse_lazy("calendar")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
