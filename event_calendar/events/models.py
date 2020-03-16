@@ -3,6 +3,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 
 class Event(models.Model):
@@ -25,6 +26,10 @@ class Event(models.Model):
     def clean(self):
         if self.start_date > self.end_date:
             raise ValidationError({"end_date": ("Event cannot end before it started.")})
+
+    def get_event_url(self):
+        url = reverse("events:Detail", args=[self.id,])
+        return '<a href="%s">%s</a>' % (url, str(self.name))
 
     # Should not let end be less than start
 
