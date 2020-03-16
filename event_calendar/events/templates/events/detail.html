@@ -1,3 +1,6 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
 <h1>{{ event.name }}</h1>
 <p>
     Event starts on: {{event.start_date}}
@@ -8,3 +11,5 @@
 
 <br><a href="{% url 'events:Calendar' %}">{{ "Back to calendar" }}</a>
 <br><a href="{% url 'events:All events' %}">{{ "See all events" }}</a>
+
+{% endblock content %}

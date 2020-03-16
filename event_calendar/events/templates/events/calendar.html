@@ -1,3 +1,6 @@
+{% extends 'events/base.html' %}
+{% block content %}
+
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'events/style.css' %}">
 
@@ -7,3 +10,5 @@
 </div>
 
 {{ calendar }}
+
+{% endblock content %}
