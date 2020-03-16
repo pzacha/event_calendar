@@ -11,10 +11,12 @@ class Calendar(HTMLCalendar):
         super().__init__()
 
     def formatday(self, day, events):
-        events_per_day = events.filter(start_date__day=day)
+        events_per_day = events.filter(start_date__day__lte=day).filter(
+            end_date__day__gte=day
+        )
+        # filter(start_date__lte=timezone.now()).filter(end_date__gte=timezone.now())
         event_html = ""
         for event in events_per_day:
-            # event_html += f"<li class='calendar_list'> {event.name} </li>"
             event_html += event.get_event_url() + "<br>"
         if day != 0:
             return f"<td><span class='date'>{day}</span><ul> {event_html} </ul></td>"
