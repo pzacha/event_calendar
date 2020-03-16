@@ -16,6 +16,11 @@ class AllEventsView(generic.ListView):
         """Return all upcoming or ongoing events"""
         return Event.objects.order_by("start_date")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "All events"
+        return context
+
 
 class ClosestEventsView(generic.ListView):
     template_name = "events/events.html"
@@ -26,6 +31,11 @@ class ClosestEventsView(generic.ListView):
         return Event.objects.filter(end_date__gte=timezone.now()).order_by(
             "start_date"
         )[:5]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Closest events"
+        return context
 
 
 class OngoingEventsView(generic.ListView):
@@ -40,6 +50,11 @@ class OngoingEventsView(generic.ListView):
             .order_by("start_date")
         )
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Ongoing events"
+        return context
+
 
 class PastEventsView(generic.ListView):
     template_name = "events/events.html"
@@ -49,10 +64,20 @@ class PastEventsView(generic.ListView):
         """Return all past events"""
         return Event.objects.filter(end_date__lte=timezone.now()).order_by("start_date")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = "Past events"
+        return context
+
 
 class DetailView(generic.DetailView):
     model = Event
     template_name = "events/detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = context["object"].name
+        return context
 
 
 class CalendarView(generic.ListView):
@@ -61,6 +86,8 @@ class CalendarView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context["title"] = "Calendar"
+
         m = context["view"].kwargs["month"]
         y = context["view"].kwargs["year"]
 
