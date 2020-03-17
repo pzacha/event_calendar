@@ -9,7 +9,6 @@
     <br>Status of event: {{event.status}}
 </p>
 
-<br><a href="{% url 'events:Calendar' %}">{{ "Back to calendar" }}</a>
-<br><a href="{% url 'events:All events' %}">{{ "See all events" }}</a>
+<a class="btn btn-secondary" href="{{request.META.HTTP_REFERER}}" role="button">Go back</a>
 
 {% endblock content %}

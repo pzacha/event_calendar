@@ -6,6 +6,10 @@ Calendar page:
 
 ![calendar](/img/calendar.PNG)
 
+Event list page:
+
+![calendar](/img/events.PNG)
+
 Detail page:
 
 ![calendar](/img/detail.PNG)
@@ -18,6 +22,7 @@ This version includes:
 ## Technologies
 * python 3.8.0
 	* Django 3.0.4
+* Bootstrap 4
 
 ## TODO
 List of features ready and TODOs for future development
