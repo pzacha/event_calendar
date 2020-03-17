@@ -1,20 +1,21 @@
 {% extends 'events/base.html' %}
+
+
 {% block content %}
 
 {% if events_list %}
-<ul>
+<div class="list-group">
     {% for event in events_list %}
-    <li><a href="{% url 'events:Detail' event.id %}">{{ event.name }}</a></li>
+    <a href="{% url 'events:Detail' event.id %}" class="list-group-item list-group-item-action">{{ event.name }}</a>
     {% endfor %}
-</ul>
+</div>
 {% else %}
 <p>No events are available.</p>
 {% endif %}
 
-<br><a href="{% url 'events:All events' %}">{{ "All events" }}</a>
-<br><a href="{% url 'events:Closest events' %}">{{ "Closest events" }}</a>
-<br><a href="{% url 'events:Ongoing events' %}">{{ "Ongoing events" }}</a>
-<br><a href="{% url 'events:Past events' %}">{{ "Past events" }}</a>
-<br><br><a href="{% url 'events:Calendar' %}">{{ "Event calendar" }}</a>
+<a class="btn btn-secondary" href="{% url 'events:All events' %}" role="button">All events</a>
+<a class="btn btn-secondary" href="{% url 'events:Closest events' %}" role="button">Closest events</a>
+<a class="btn btn-secondary" href="{% url 'events:Ongoing events' %}" role="button">Ongoing events</a>
+<a class="btn btn-secondary" href="{% url 'events:Past events' %}" role="button">Past events</a>
 
 {% endblock content %}
