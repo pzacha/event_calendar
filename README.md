@@ -29,7 +29,6 @@ List of features ready and TODOs for future development
 * User model (many-to-many relationship with Event model)
 * User authentication
 * Method detecting if users events are overlapping
-* Frontend
 
 ## Status
 Project is: _in_progress_
