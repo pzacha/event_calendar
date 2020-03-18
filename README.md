@@ -17,7 +17,7 @@ Detail page:
 ## General info
 This version includes:
 * An admin site for managing database.
-* Viewing closest, ongoing and past events.
+* Viewing and managing cultural events.
 
 ## Technologies
 * python 3.8.0
@@ -25,7 +25,7 @@ This version includes:
 * Bootstrap 4
 
 ## TODO
-List of features ready and TODOs for future development
+List of TODOs for future development
 * User model (many-to-many relationship with Event model)
 * User authentication
 * Method detecting if users events are overlapping
