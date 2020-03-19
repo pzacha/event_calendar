@@ -5,13 +5,15 @@ from django.db import models
 from django.utils import timezone
 from django.urls import reverse
 
+from users.models import CustomUser
+
 
 class Event(models.Model):
     name = models.CharField(max_length=100)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     desc = models.TextField("Event description", blank=True, max_length=1500)
-    # participants = models.ManyToManyField(User, related_name="events")
+    participants = models.ManyToManyField(CustomUser, related_name="events")
 
     def __str__(self):
         return self.name
