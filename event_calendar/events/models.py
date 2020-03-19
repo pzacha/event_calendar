@@ -1,6 +1,5 @@
 import datetime
 
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
@@ -12,7 +11,7 @@ class Event(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     desc = models.TextField("Event description", blank=True, max_length=1500)
-    participants = models.ManyToManyField(User, related_name="events")
+    # participants = models.ManyToManyField(User, related_name="events")
 
     def __str__(self):
         return self.name

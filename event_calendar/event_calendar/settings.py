@@ -124,3 +124,5 @@ LOGIN_REDIRECT_URL = "events:Calendar"
 
 LOGIN_URL = "users:Login"
 
+AUTH_USER_MODEL = "users.CustomUser"
+
