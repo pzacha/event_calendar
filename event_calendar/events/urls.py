@@ -21,4 +21,5 @@ urlpatterns = [
         {"month": timezone.now().month, "year": timezone.now().year},
         name="Calendar",
     ),
+    path("create/", views.EventCreateView.as_view(), name="Create"),
 ]

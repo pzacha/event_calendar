@@ -105,3 +105,9 @@ class CalendarView(generic.ListView):
             context["prev_month"] = 12
             context["prev_year"] = y - 1
         return context
+
+
+class EventCreateView(generic.CreateView):
+    model = Event
+    fields = ["name", "start_date", "end_date"]
+    template_name = "events/create.html"

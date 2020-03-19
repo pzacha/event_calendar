@@ -1,14 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <div class="media-body">
+        <h2 class="article-title">{{ event.name }}</h2>
+        <p class="article-content">Start: <strong>{{event.start_date}}</strong></p>
+        <p class="article-content">End: <strong>{{event.end_date}}</strong></p>
+        <p class="article-content">{{event.desc}}</p>
+        <p class="article-content">Status of event: <strong>{{event.status}}</strong></p>
 
-<h1>{{ event.name }}</h1>
-<p>
-    Event starts on: {{event.start_date}}
-    <br>Event ends on: {{event.end_date}}<br>
-    <br>{{event.desc}}
-    <br>Status of event: {{event.status}}
-</p>
-
-<a class="btn btn-secondary" href="{{request.META.HTTP_REFERER}}" role="button">Go back</a>
+    </div>
+    <a class="btn btn-secondary" href="{{request.META.HTTP_REFERER}}" role="button">Go back</a>
+</article>
 
 {% endblock content %}
