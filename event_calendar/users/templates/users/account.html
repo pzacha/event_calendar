@@ -8,6 +8,11 @@
             <p class="text-secondary">{{ user.email }}</p>
         </div>
     </div>
+
+    <legend class="mb-4">Create new event: <a class="btn btn-primary" href="{% url 'events:Create' %}"
+            role="button">Create</a></legend>
+
+
     <form method="POST">
         {% csrf_token %}
         <fieldset class="form-group">

@@ -1,6 +1,18 @@
 # Event calendar
 > Application that allows to view and manage cultural events.
 
+## General info
+This version includes among others:
+* An admin site for managing database.
+* User authentication.
+* Viewing and managing cultural events.
+* Creating new events.
+
+## Technologies
+* python 3.8.0
+	* Django 3.0.4
+* Bootstrap 4
+
 ## Screenshots
 Calendar page:
 
@@ -8,21 +20,15 @@ Calendar page:
 
 Event list page:
 
-![calendar](/img/events.PNG)
+![events](/img/events.PNG)
 
 Detail page:
 
-![calendar](/img/detail.PNG)
+![detail](/img/detail.PNG)
 
-## General info
-This version includes:
-* An admin site for managing database.
-* Viewing and managing cultural events.
+Detail page:
 
-## Technologies
-* python 3.8.0
-	* Django 3.0.4
-* Bootstrap 4
+![account](/img/account.PNG)
 
 ## TODO
 List of TODOs for future development
