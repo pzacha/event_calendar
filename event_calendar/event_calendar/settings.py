@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     "events.apps.EventsConfig",
     "users.apps.UsersConfig",
     "crispy_forms",
+    "bootstrap4",
+    "bootstrap_datepicker_plus",
 ]
 
 MIDDLEWARE = [
@@ -125,4 +127,3 @@ LOGIN_REDIRECT_URL = "events:Calendar"
 LOGIN_URL = "users:Login"
 
 AUTH_USER_MODEL = "users.CustomUser"
-

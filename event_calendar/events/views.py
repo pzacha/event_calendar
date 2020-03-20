@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.http import request
 
+from bootstrap_datepicker_plus import DateTimePickerInput
+
 from .utils import Calendar
 from .models import Event
 
@@ -107,7 +109,13 @@ class CalendarView(generic.ListView):
         return context
 
 
-class EventCreateView(generic.CreateView):
+class EventCreateView(generic.edit.CreateView):
     model = Event
-    fields = ["name", "start_date", "end_date"]
     template_name = "events/create.html"
+    fields = ["name", "start_date", "end_date"]
+
+    def get_form(self):
+        form = super().get_form()
+        form.fields["start_date"].widget = DateTimePickerInput()
+        form.fields["end_date"].widget = DateTimePickerInput()
+        return form

@@ -34,5 +34,6 @@ class Event(models.Model):
         url = reverse("events:Detail", args=[self.id,])
         return '<a href="%s">%s</a>' % (url, str(self.name))
 
-    # Should not let end be less than start
+    def get_absolute_url(self):
+        return reverse("events:Detail", args=[str(self.id)])
 
