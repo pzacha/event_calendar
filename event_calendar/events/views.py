@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from django.utils.safestring import mark_safe
 from django.http import request
+from django.shortcuts import redirect
 
 from bootstrap_datepicker_plus import DateTimePickerInput
 
@@ -119,3 +120,13 @@ class EventCreateView(generic.edit.CreateView):
         form.fields["start_date"].widget = DateTimePickerInput()
         form.fields["end_date"].widget = DateTimePickerInput()
         return form
+
+
+def manage_participants(request, instruction, pk):
+    event = Event.objects.get(pk=pk)
+    if instruction == "take_part":
+        event.take_part(request.user)
+    elif instruction == "resign":
+        event.resign(request.user)
+
+    return redirect("events:Calendar")

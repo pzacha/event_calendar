@@ -13,7 +13,7 @@ class Event(models.Model):
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
     desc = models.TextField("Event description", blank=True, max_length=1500)
-    participants = models.ManyToManyField(CustomUser, related_name="events")
+    participants = models.ManyToManyField(CustomUser, blank=True, related_name="events")
 
     def __str__(self):
         return self.name
@@ -30,10 +30,15 @@ class Event(models.Model):
         if self.start_date > self.end_date:
             raise ValidationError({"end_date": ("Event cannot end before it started.")})
 
+    def take_part(self, current_user):
+        self.participants.add(current_user)
+
+    def resign(self, current_user):
+        self.participants.remove(current_user)
+
     def get_event_url(self):
         url = reverse("events:Detail", args=[self.id,])
         return '<a href="%s">%s</a>' % (url, str(self.name))
 
     def get_absolute_url(self):
         return reverse("events:Detail", args=[str(self.id)])
-

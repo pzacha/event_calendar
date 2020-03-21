@@ -12,6 +12,15 @@
     <legend class="mb-4">Create new event: <a class="btn btn-primary" href="{% url 'events:Create' %}"
             role="button">Create</a></legend>
 
+    <p>Events attending:</p>
+
+    <div class="list-group">
+        {% for e in user.events.all %}
+        <a href="{% url 'events:Detail' e.id %}" class="list-group-item list-group-item-action">{{ e }}</a>
+        {% endfor %}
+    </div>
+    <br>
+
 
     <form method="POST">
         {% csrf_token %}
