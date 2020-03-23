@@ -1,1 +1,1 @@
-web: gunicorn Event_calendar.wsgi
+web: gunicorn event_calendar.wsgi
