@@ -1,1 +1,1 @@
-web: gunicorn event_calendar.event_calendar.wsgi --log-file -
+web:gunicorn event_calendar.wsgi --log-file -
