@@ -1,1 +1,1 @@
-web: gunicorn event_calendar.wsgi
+web: gunicorn --pythonpath event_calendar event_calendar.wsgi
