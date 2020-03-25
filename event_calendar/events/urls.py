@@ -22,5 +22,5 @@ urlpatterns = [
         name="Calendar",
     ),
     path("create/", views.EventCreateView.as_view(), name="Create"),
-    path("<instruction>/<pk>/", views.manage_participants, name="Manage"),
+    path("manage/<instruction>/<pk>/", views.manage_participants, name="Manage"),
 ]
